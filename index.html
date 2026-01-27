@@ -10,21 +10,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --purple: #8b5cf6;
-            --purple-dark: #7c3aed;
-            --purple-light: #a78bfa;
-            --cyan: #06b6d4;
-            --cyan-dark: #0891b2;
-            --cyan-light: #22d3ee;
-            --bg-dark: #0a0a0f;
-            --bg-card: #111118;
-            --bg-card-hover: #18181f;
-            --text-primary: #ffffff;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
-            --border: #27272a;
-            --gradient-purple-cyan: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
-            --gradient-radial: radial-gradient(ellipse at center, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            --background: 0 0% 3.9%;
+            --foreground: 0 0% 98%;
+            --card: 0 0% 3.9%;
+            --card-foreground: 0 0% 98%;
+            --popover: 0 0% 3.9%;
+            --popover-foreground: 0 0% 98%;
+            --primary: 0 0% 98%;
+            --primary-foreground: 0 0% 9%;
+            --secondary: 0 0% 14.9%;
+            --secondary-foreground: 0 0% 98%;
+            --muted: 0 0% 14.9%;
+            --muted-foreground: 0 0% 63.9%;
+            --accent: 0 0% 14.9%;
+            --accent-foreground: 0 0% 98%;
+            --destructive: 0 62.8% 30.6%;
+            --destructive-foreground: 0 0% 98%;
+            --border: 0 0% 14.9%;
+            --input: 0 0% 14.9%;
+            --ring: 0 0% 83.1%;
+            --radius: 0.5rem;
         }
 
         * {
@@ -39,41 +44,10 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-primary);
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
             line-height: 1.6;
             overflow-x: hidden;
-        }
-
-        /* Background Effects */
-        .bg-glow {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .bg-glow::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background:
-                radial-gradient(ellipse at 20% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(139, 92, 246, 0.03) 0%, transparent 70%);
-            animation: float 30s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(2%, 2%) rotate(1deg); }
-            66% { transform: translate(-1%, 1%) rotate(-1deg); }
         }
 
         /* Container */
@@ -82,7 +56,6 @@
             margin: 0 auto;
             padding: 0 24px;
             position: relative;
-            z-index: 1;
         }
 
         /* Navigation */
@@ -92,9 +65,9 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            background: rgba(10, 10, 15, 0.8);
+            background: hsla(var(--background), 0.8);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid hsl(var(--border));
         }
 
         .nav-container {
@@ -117,24 +90,24 @@
         .logo-icon {
             width: 40px;
             height: 40px;
-            background: var(--gradient-purple-cyan);
+            background: hsl(var(--foreground));
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
             font-size: 18px;
-            color: white;
+            color: hsl(var(--background));
         }
 
         .logo-text {
             font-size: 20px;
             font-weight: 700;
-            color: var(--text-primary);
+            color: hsl(var(--foreground));
         }
 
         .logo-text span {
-            color: var(--text-secondary);
+            color: hsl(var(--muted-foreground));
             font-weight: 400;
         }
 
@@ -145,7 +118,7 @@
         }
 
         .nav-links a {
-            color: var(--text-secondary);
+            color: hsl(var(--muted-foreground));
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
@@ -153,7 +126,7 @@
         }
 
         .nav-links a:hover {
-            color: var(--text-primary);
+            color: hsl(var(--foreground));
         }
 
         .nav-cta {
@@ -168,7 +141,7 @@
             justify-content: center;
             gap: 8px;
             padding: 12px 24px;
-            border-radius: 8px;
+            border-radius: var(--radius);
             font-size: 14px;
             font-weight: 600;
             text-decoration: none;
@@ -178,24 +151,22 @@
         }
 
         .btn-primary {
-            background: var(--gradient-purple-cyan);
-            color: white;
+            background: hsl(var(--foreground));
+            color: hsl(var(--background));
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
+            background: hsl(0 0% 90%);
         }
 
         .btn-secondary {
             background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--border);
+            color: hsl(var(--foreground));
+            border: 1px solid hsl(var(--border));
         }
 
         .btn-secondary:hover {
-            background: var(--bg-card);
-            border-color: var(--purple);
+            background: hsl(var(--secondary));
         }
 
         .btn-large {
@@ -221,12 +192,12 @@
             align-items: center;
             gap: 8px;
             padding: 8px 16px;
-            background: rgba(139, 92, 246, 0.1);
-            border: 1px solid rgba(139, 92, 246, 0.2);
+            background: hsl(var(--secondary));
+            border: 1px solid hsl(var(--border));
             border-radius: 100px;
             font-size: 13px;
             font-weight: 500;
-            color: var(--purple-light);
+            color: hsl(var(--muted-foreground));
             margin-bottom: 24px;
         }
 
@@ -234,7 +205,7 @@
             content: '';
             width: 8px;
             height: 8px;
-            background: var(--purple);
+            background: hsl(var(--foreground));
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
@@ -250,18 +221,12 @@
             line-height: 1.1;
             margin-bottom: 24px;
             letter-spacing: -0.02em;
-        }
-
-        .hero h1 .gradient-text {
-            background: var(--gradient-purple-cyan);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: hsl(var(--foreground));
         }
 
         .hero p {
             font-size: 20px;
-            color: var(--text-secondary);
+            color: hsl(var(--muted-foreground));
             margin-bottom: 40px;
             max-width: 600px;
         }
@@ -278,7 +243,7 @@
             gap: 32px;
             margin-top: 80px;
             padding-top: 40px;
-            border-top: 1px solid var(--border);
+            border-top: 1px solid hsl(var(--border));
         }
 
         .stat {
@@ -288,17 +253,14 @@
         .stat-value {
             font-size: 48px;
             font-weight: 800;
-            background: var(--gradient-purple-cyan);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: hsl(var(--foreground));
             line-height: 1;
             margin-bottom: 8px;
         }
 
         .stat-label {
             font-size: 14px;
-            color: var(--text-secondary);
+            color: hsl(var(--muted-foreground));
             font-weight: 500;
         }
 
@@ -320,7 +282,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--cyan);
+            color: hsl(var(--muted-foreground));
             margin-bottom: 16px;
         }
 
@@ -329,16 +291,17 @@
             font-weight: 700;
             margin-bottom: 16px;
             letter-spacing: -0.02em;
+            color: hsl(var(--foreground));
         }
 
         .section-desc {
             font-size: 18px;
-            color: var(--text-secondary);
+            color: hsl(var(--muted-foreground));
         }
 
         /* Mission Section */
         .mission {
-            background: linear-gradient(180deg, transparent 0%, rgba(139, 92, 246, 0.03) 50%, transparent 100%);
+            border-top: 1px solid hsl(var(--border));
         }
 
         .mission-grid {
@@ -353,11 +316,12 @@
             font-weight: 700;
             margin-bottom: 24px;
             line-height: 1.2;
+            color: hsl(var(--foreground));
         }
 
         .mission-content p {
             font-size: 18px;
-            color: var(--text-secondary);
+            color: hsl(var(--muted-foreground));
             margin-bottom: 16px;
         }
 
@@ -369,16 +333,6 @@
             justify-content: center;
         }
 
-        .mission-orb {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: var(--gradient-purple-cyan);
-            opacity: 0.1;
-            filter: blur(60px);
-            position: absolute;
-        }
-
         .mission-rings {
             position: relative;
             width: 280px;
@@ -387,7 +341,7 @@
 
         .mission-ring {
             position: absolute;
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            border: 1px solid hsl(var(--border));
             border-radius: 50%;
             animation: rotate 20s linear infinite;
         }
@@ -404,7 +358,6 @@
             height: 75%;
             top: 12.5%;
             left: 12.5%;
-            border-color: rgba(6, 182, 212, 0.3);
             animation-direction: reverse;
             animation-duration: 15s;
         }
@@ -422,17 +375,11 @@
             position: absolute;
             width: 12px;
             height: 12px;
-            background: var(--purple);
+            background: hsl(var(--foreground));
             border-radius: 50%;
             top: -6px;
             left: 50%;
             transform: translateX(-50%);
-            box-shadow: 0 0 20px var(--purple);
-        }
-
-        .mission-ring:nth-child(2)::after {
-            background: var(--cyan);
-            box-shadow: 0 0 20px var(--cyan);
         }
 
         @keyframes rotate {
@@ -448,76 +395,38 @@
         }
 
         .focus-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
             padding: 40px;
             transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .focus-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--gradient-purple-cyan);
-            opacity: 0;
-            transition: opacity 0.3s;
         }
 
         .focus-card:hover {
-            background: var(--bg-card-hover);
-            border-color: rgba(139, 92, 246, 0.3);
-            transform: translateY(-4px);
-        }
-
-        .focus-card:hover::before {
-            opacity: 1;
+            border-color: hsl(0 0% 30%);
         }
 
         .focus-icon {
             width: 56px;
             height: 56px;
-            border-radius: 12px;
+            border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 24px;
             font-size: 24px;
-        }
-
-        .focus-card:nth-child(1) .focus-icon {
-            background: rgba(139, 92, 246, 0.1);
-            color: var(--purple);
-        }
-
-        .focus-card:nth-child(2) .focus-icon {
-            background: rgba(6, 182, 212, 0.1);
-            color: var(--cyan);
-        }
-
-        .focus-card:nth-child(3) .focus-icon {
-            background: rgba(34, 211, 238, 0.1);
-            color: var(--cyan-light);
-        }
-
-        .focus-card:nth-child(4) .focus-icon {
-            background: rgba(167, 139, 250, 0.1);
-            color: var(--purple-light);
+            background: hsl(var(--secondary));
         }
 
         .focus-card h3 {
             font-size: 24px;
             font-weight: 600;
             margin-bottom: 12px;
+            color: hsl(var(--foreground));
         }
 
         .focus-card p {
-            color: var(--text-secondary);
+            color: hsl(var(--muted-foreground));
             font-size: 15px;
             margin-bottom: 24px;
         }
@@ -532,32 +441,20 @@
             gap: 12px;
             padding: 8px 0;
             font-size: 14px;
-            color: var(--text-secondary);
+            color: hsl(var(--muted-foreground));
         }
 
         .focus-card li::before {
             content: '';
             width: 6px;
             height: 6px;
-            background: var(--purple);
+            background: hsl(var(--muted-foreground));
             border-radius: 50%;
-        }
-
-        .focus-card:nth-child(2) li::before {
-            background: var(--cyan);
-        }
-
-        .focus-card:nth-child(3) li::before {
-            background: var(--cyan-light);
-        }
-
-        .focus-card:nth-child(4) li::before {
-            background: var(--purple-light);
         }
 
         /* Team Section */
         .team {
-            background: linear-gradient(180deg, transparent 0%, rgba(6, 182, 212, 0.03) 50%, transparent 100%);
+            border-top: 1px solid hsl(var(--border));
         }
 
         .team-grid {
@@ -568,49 +465,49 @@
         }
 
         .team-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
             padding: 32px 24px;
             text-align: center;
             transition: all 0.3s;
         }
 
         .team-card:hover {
-            background: var(--bg-card-hover);
-            border-color: rgba(139, 92, 246, 0.3);
-            transform: translateY(-4px);
+            border-color: hsl(0 0% 30%);
         }
 
         .team-avatar {
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background: var(--gradient-purple-cyan);
+            background: hsl(var(--secondary));
             margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 28px;
             font-weight: 700;
-            color: white;
+            color: hsl(var(--foreground));
+            border: 1px solid hsl(var(--border));
         }
 
         .team-card h4 {
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 4px;
+            color: hsl(var(--foreground));
         }
 
         .team-card .role {
             font-size: 14px;
-            color: var(--cyan);
+            color: hsl(var(--muted-foreground));
             margin-bottom: 12px;
         }
 
         .team-card .bio {
             font-size: 13px;
-            color: var(--text-muted);
+            color: hsl(var(--muted-foreground));
         }
 
         .advisors-title {
@@ -618,7 +515,7 @@
             font-size: 24px;
             font-weight: 600;
             margin-bottom: 32px;
-            color: var(--text-secondary);
+            color: hsl(var(--muted-foreground));
         }
 
         .advisors-grid {
@@ -636,25 +533,27 @@
             width: 64px;
             height: 64px;
             border-radius: 50%;
-            background: rgba(139, 92, 246, 0.2);
+            background: hsl(var(--secondary));
             margin: 0 auto 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 20px;
             font-weight: 600;
-            color: var(--purple-light);
+            color: hsl(var(--muted-foreground));
+            border: 1px solid hsl(var(--border));
         }
 
         .advisor h5 {
             font-size: 15px;
             font-weight: 600;
             margin-bottom: 4px;
+            color: hsl(var(--foreground));
         }
 
         .advisor .org {
             font-size: 13px;
-            color: var(--text-muted);
+            color: hsl(var(--muted-foreground));
         }
 
         /* Partners Section */
@@ -666,9 +565,9 @@
         }
 
         .partner-logo {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
             padding: 24px;
             display: flex;
             align-items: center;
@@ -678,14 +577,13 @@
         }
 
         .partner-logo:hover {
-            border-color: var(--purple);
-            background: var(--bg-card-hover);
+            border-color: hsl(0 0% 30%);
         }
 
         .partner-logo span {
             font-size: 16px;
             font-weight: 600;
-            color: var(--text-secondary);
+            color: hsl(var(--muted-foreground));
             letter-spacing: -0.01em;
         }
 
@@ -694,13 +592,13 @@
         }
 
         .partners-cta p {
-            color: var(--text-secondary);
+            color: hsl(var(--muted-foreground));
             margin-bottom: 16px;
         }
 
         /* Get Involved Section */
         .involved {
-            background: linear-gradient(180deg, transparent 0%, rgba(139, 92, 246, 0.05) 100%);
+            border-top: 1px solid hsl(var(--border));
         }
 
         .involved-grid {
@@ -710,50 +608,39 @@
         }
 
         .involved-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
             padding: 40px;
             text-align: center;
             transition: all 0.3s;
         }
 
         .involved-card:hover {
-            border-color: rgba(139, 92, 246, 0.5);
-            transform: translateY(-4px);
+            border-color: hsl(0 0% 30%);
         }
 
         .involved-icon {
             width: 64px;
             height: 64px;
             margin: 0 auto 24px;
-            border-radius: 16px;
+            border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 28px;
-        }
-
-        .involved-card:nth-child(1) .involved-icon {
-            background: rgba(139, 92, 246, 0.1);
-        }
-
-        .involved-card:nth-child(2) .involved-icon {
-            background: rgba(6, 182, 212, 0.1);
-        }
-
-        .involved-card:nth-child(3) .involved-icon {
-            background: rgba(167, 139, 250, 0.1);
+            background: hsl(var(--secondary));
         }
 
         .involved-card h3 {
             font-size: 22px;
             font-weight: 600;
             margin-bottom: 12px;
+            color: hsl(var(--foreground));
         }
 
         .involved-card p {
-            color: var(--text-secondary);
+            color: hsl(var(--muted-foreground));
             font-size: 15px;
             margin-bottom: 24px;
         }
@@ -764,30 +651,14 @@
         }
 
         .newsletter-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 24px;
+            background: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
             padding: 64px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .newsletter-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(ellipse at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
-            pointer-events: none;
         }
 
         .newsletter-content {
-            position: relative;
             max-width: 500px;
             margin: 0 auto;
         }
@@ -796,10 +667,11 @@
             font-size: 36px;
             font-weight: 700;
             margin-bottom: 16px;
+            color: hsl(var(--foreground));
         }
 
         .newsletter p {
-            color: var(--text-secondary);
+            color: hsl(var(--muted-foreground));
             font-size: 16px;
             margin-bottom: 32px;
         }
@@ -814,26 +686,26 @@
         .newsletter-form input {
             flex: 1;
             padding: 16px 20px;
-            background: var(--bg-dark);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text-primary);
+            background: hsl(var(--background));
+            border: 1px solid hsl(var(--border));
+            border-radius: var(--radius);
+            color: hsl(var(--foreground));
             font-size: 15px;
             outline: none;
             transition: border-color 0.2s;
         }
 
         .newsletter-form input::placeholder {
-            color: var(--text-muted);
+            color: hsl(var(--muted-foreground));
         }
 
         .newsletter-form input:focus {
-            border-color: var(--purple);
+            border-color: hsl(0 0% 40%);
         }
 
         /* Footer */
         footer {
-            border-top: 1px solid var(--border);
+            border-top: 1px solid hsl(var(--border));
             padding: 64px 0 32px;
         }
 
@@ -845,7 +717,7 @@
         }
 
         .footer-brand p {
-            color: var(--text-muted);
+            color: hsl(var(--muted-foreground));
             font-size: 14px;
             margin-top: 16px;
             max-width: 280px;
@@ -856,7 +728,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: var(--text-secondary);
+            color: hsl(var(--muted-foreground));
             margin-bottom: 20px;
         }
 
@@ -869,14 +741,14 @@
         }
 
         .footer-col a {
-            color: var(--text-muted);
+            color: hsl(var(--muted-foreground));
             text-decoration: none;
             font-size: 14px;
             transition: color 0.2s;
         }
 
         .footer-col a:hover {
-            color: var(--text-primary);
+            color: hsl(var(--foreground));
         }
 
         .footer-bottom {
@@ -884,11 +756,11 @@
             justify-content: space-between;
             align-items: center;
             padding-top: 32px;
-            border-top: 1px solid var(--border);
+            border-top: 1px solid hsl(var(--border));
         }
 
         .footer-bottom p {
-            color: var(--text-muted);
+            color: hsl(var(--muted-foreground));
             font-size: 13px;
         }
 
@@ -900,22 +772,22 @@
         .footer-social a {
             width: 40px;
             height: 40px;
-            border-radius: 8px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: hsl(var(--secondary));
+            border: 1px solid hsl(var(--border));
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-secondary);
+            color: hsl(var(--muted-foreground));
             text-decoration: none;
             transition: all 0.2s;
             font-size: 14px;
         }
 
         .footer-social a:hover {
-            background: var(--bg-card-hover);
-            border-color: var(--purple);
-            color: var(--text-primary);
+            background: hsl(var(--accent));
+            border-color: hsl(0 0% 30%);
+            color: hsl(var(--foreground));
         }
 
         /* Mobile Menu */
@@ -923,7 +795,7 @@
             display: none;
             background: none;
             border: none;
-            color: var(--text-primary);
+            color: hsl(var(--foreground));
             font-size: 24px;
             cursor: pointer;
         }
@@ -1029,8 +901,6 @@
     </style>
 </head>
 <body>
-    <div class="bg-glow"></div>
-
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
@@ -1058,7 +928,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-badge">Non-Profit Foundation</div>
-                <h1>Advancing <span class="gradient-text">Decentralized</span> Technology for Everyone</h1>
+                <h1>Advancing Decentralized Technology for Everyone</h1>
                 <p>The Lux Foundation supports groundbreaking research, funds innovative projects, and builds educational resources to accelerate the adoption of decentralized technology worldwide.</p>
                 <div class="hero-buttons">
                     <a href="#involved" class="btn btn-primary btn-large">Apply for a Grant</a>
@@ -1094,7 +964,6 @@
                     <p>Our work spans consensus mechanisms, post-quantum cryptography, cross-chain interoperability, and developer tooling - all designed to make decentralized technology more accessible, secure, and scalable.</p>
                 </div>
                 <div class="mission-visual">
-                    <div class="mission-orb"></div>
                     <div class="mission-rings">
                         <div class="mission-ring"></div>
                         <div class="mission-ring"></div>
@@ -1393,9 +1262,9 @@
             const currentScroll = window.pageYOffset;
 
             if (currentScroll > 100) {
-                nav.style.background = 'rgba(10, 10, 15, 0.95)';
+                nav.style.background = 'hsla(0, 0%, 3.9%, 0.95)';
             } else {
-                nav.style.background = 'rgba(10, 10, 15, 0.8)';
+                nav.style.background = 'hsla(0, 0%, 3.9%, 0.8)';
             }
 
             lastScroll = currentScroll;
